@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "soundcloud",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "soundcloud": {
+      "projectType": "application",
+      "root": "apps/soundcloud",
+      "sourceRoot": "apps/soundcloud/src",
+      "prefix": "soundcloud",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/soundcloud",
+            "index": "apps/soundcloud/src/index.html",
+            "main": "apps/soundcloud/src/main.ts",
+            "polyfills": "apps/soundcloud/src/polyfills.ts",
+            "tsConfig": "apps/soundcloud/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/soundcloud/src/favicon.ico",
+              "apps/soundcloud/src/assets"
+            ],
+            "styles": ["apps/soundcloud/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/soundcloud/src/environments/environment.ts",
+                  "with": "apps/soundcloud/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "soundcloud:build:production"
+            },
+            "development": {
+              "browserTarget": "soundcloud:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "soundcloud:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/soundcloud/src/**/*.ts",
+              "apps/soundcloud/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/soundcloud"],
+          "options": {
+            "jestConfig": "apps/soundcloud/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "soundcloud-e2e": {
+      "root": "apps/soundcloud-e2e",
+      "sourceRoot": "apps/soundcloud-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/soundcloud-e2e/cypress.json",
+            "tsConfig": "apps/soundcloud-e2e/tsconfig.e2e.json",
+            "devServerTarget": "soundcloud:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "soundcloud:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/soundcloud-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
