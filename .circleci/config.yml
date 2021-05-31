@@ -12,6 +12,7 @@ defaults: &defaults
 set_env: &set_env
   name: Setup Environment Variables
   command: |
+    env
     if [[ $CIRCLE_PULL_REQUEST ]]
     then
       echo 'Fetching Base Commit from GitHub'
@@ -146,13 +147,13 @@ workflows:
   pr_check:
     jobs:
       - install
-      - check-formatting:
-          requires:
-            - install
       - lint:
           requires:
             - install
       - test:
+          requires:
+            - install
+      - check-formatting:
           requires:
             - install
       - build:
