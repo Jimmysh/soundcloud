@@ -1,3 +1,3 @@
 module.exports = {
-  projects: ['<rootDir>/apps/soundcloud'],
+  projects: ['<rootDir>/apps/soundcloud']
 };

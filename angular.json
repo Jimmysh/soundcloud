@@ -47,10 +47,7 @@
             "polyfills": "apps/soundcloud/src/polyfills.ts",
             "tsConfig": "apps/soundcloud/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/soundcloud/src/favicon.ico",
-              "apps/soundcloud/src/assets"
-            ],
+            "assets": ["apps/soundcloud/src/favicon.ico", "apps/soundcloud/src/assets"],
             "styles": ["apps/soundcloud/src/styles.scss"],
             "scripts": []
           },
@@ -108,10 +105,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/soundcloud/src/**/*.ts",
-              "apps/soundcloud/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/soundcloud/src/**/*.ts", "apps/soundcloud/src/**/*.html"]
           }
         },
         "test": {
