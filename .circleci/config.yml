@@ -2,11 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
-
-orbs:
-  codecov: codecov/codecov@1.2.3
-  codacy: codacy/coverage-reporter@12.1.7
+version: 2
 
 defaults: &defaults
   working_directory: ~/repo
@@ -118,14 +114,7 @@ jobs:
       - restore_cache:
           <<: *yarn_cache
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
-      - store_artifacts:
-          path: coverage
-      - codacy/send_report:
-          coverage-reports: coverage/apps/soundcloud/lcov.info
-          project-token: $CODACY_PROJECT_TOKEN
-      - codecov/upload:
-          file: coverage/**/lcov.info
-
+      - run: *coverage
   e2e:
     <<: *defaults
     steps:
