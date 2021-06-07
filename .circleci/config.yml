@@ -117,6 +117,8 @@ jobs:
       - restore_cache:
           <<: *yarn_cache
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
+      - store_artifacts:
+          path: coverage
       - coverage-reporter/send_report:
           coverage-reports: 'coverage/**/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
