@@ -5,7 +5,8 @@
 version: 2.1
 
 orbs:
-  coverage-reporter: codacy/coverage-reporter@12.1.7
+  codecov: codecov/codecov@1.2.3
+  codacy: codacy/coverage-reporter@12.1.7
 
 defaults: &defaults
   working_directory: ~/repo
@@ -119,10 +120,13 @@ jobs:
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
       - store_artifacts:
           path: coverage
-      - coverage-reporter/send_report:
+      - codacy/send_report:
           coverage-reports: 'coverage/**/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
           skip: true
+      - codecov/upload:
+          file: { { coverage_report_filepath } }
+
   e2e:
     <<: *defaults
     steps:
