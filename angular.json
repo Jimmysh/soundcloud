@@ -41,7 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/apps/soundcloud",
+            "outputPath": "dist/soundcloud/browser",
             "index": "apps/soundcloud/src/index.html",
             "main": "apps/soundcloud/src/main.ts",
             "polyfills": "apps/soundcloud/src/polyfills.ts",
@@ -115,6 +115,63 @@
             "jestConfig": "apps/soundcloud/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/soundcloud/server",
+            "main": "apps/soundcloud/server.ts",
+            "tsConfig": "apps/soundcloud/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "apps/soundcloud/src/environments/environment.ts",
+                  "with": "apps/soundcloud/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "soundcloud:build:development",
+              "serverTarget": "soundcloud:server:development"
+            },
+            "production": {
+              "browserTarget": "soundcloud:build:production",
+              "serverTarget": "soundcloud:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "soundcloud:build:production"
+            },
+            "development": {
+              "browserTarget": "soundcloud:build:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
