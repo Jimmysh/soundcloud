@@ -122,6 +122,7 @@ jobs:
       - coverage-reporter/send_report:
           coverage-reports: 'coverage/**/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
+          skip: true
   e2e:
     <<: *defaults
     steps:
