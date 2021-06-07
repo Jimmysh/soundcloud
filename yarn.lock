@@ -112,10 +112,10 @@
     rxjs "6.6.7"
     source-map "0.7.3"
 
-"@angular-devkit/core@12.0.2":
-  version "12.0.2"
-  resolved "https://registry.nlark.com/@angular-devkit/core/download/@angular-devkit/core-12.0.2.tgz#53023140f1b011ba42eb118b1c5ab932a8069f97"
-  integrity sha1-UwIxQPGwEbpC6xGLHFq5MqgGn5c=
+"@angular-devkit/core@12.0.3":
+  version "12.0.3"
+  resolved "https://registry.nlark.com/@angular-devkit/core/download/@angular-devkit/core-12.0.3.tgz#01c796dd7d3e0c228b4628439ee1c34bbdda4f1f"
+  integrity sha1-AceW3X0+DCKLRihDnuHDS73aTx8=
   dependencies:
     ajv "8.2.0"
     ajv-formats "2.0.2"
@@ -133,12 +133,12 @@
     ora "5.4.0"
     rxjs "6.6.7"
 
-"@angular-devkit/schematics@12.0.2", "@angular-devkit/schematics@~12.0.0":
-  version "12.0.2"
-  resolved "https://registry.nlark.com/@angular-devkit/schematics/download/@angular-devkit/schematics-12.0.2.tgz?cache=0&sync_timestamp=1622062892403&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40angular-devkit%2Fschematics%2Fdownload%2F%40angular-devkit%2Fschematics-12.0.2.tgz#e53030340377117e57d87356d979d7b215e6037e"
-  integrity sha1-5TAwNAN3EX5X2HNW2XnXshXmA34=
+"@angular-devkit/schematics@12.0.3", "@angular-devkit/schematics@^12.0.0":
+  version "12.0.3"
+  resolved "https://registry.nlark.com/@angular-devkit/schematics/download/@angular-devkit/schematics-12.0.3.tgz#9c9a881db1fd4c07b78729f46e2932adf76906de"
+  integrity sha1-nJqIHbH9TAe3hyn0bikyrfdpBt4=
   dependencies:
-    "@angular-devkit/core" "12.0.2"
+    "@angular-devkit/core" "12.0.3"
     ora "5.4.0"
     rxjs "6.6.7"
 
@@ -1671,42 +1671,42 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
-"@nrwl/angular@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/angular/download/@nrwl/angular-12.3.5.tgz#f578d8f24086b33fd233cf85d506020076a7dd7a"
-  integrity sha1-9XjY8kCGsz/SM8+F1QYCAHan3Xo=
+"@nrwl/angular@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/angular/download/@nrwl/angular-12.3.6.tgz#e94107b0f081682328d41f3d89d1b57424d1576a"
+  integrity sha1-6UEHsPCBaCMo1B89idG1dCTRV2o=
   dependencies:
-    "@angular-devkit/schematics" "~12.0.0"
-    "@nrwl/cypress" "12.3.5"
-    "@nrwl/devkit" "12.3.5"
-    "@nrwl/jest" "12.3.5"
-    "@nrwl/linter" "12.3.5"
-    "@schematics/angular" "~12.0.0"
+    "@angular-devkit/schematics" "^12.0.0"
+    "@nrwl/cypress" "12.3.6"
+    "@nrwl/devkit" "12.3.6"
+    "@nrwl/jest" "12.3.6"
+    "@nrwl/linter" "12.3.6"
+    "@schematics/angular" "^12.0.0"
     jasmine-marbles "~0.6.0"
     rxjs-for-await "0.0.2"
     tslib "^2.1.0"
     webpack-merge "5.7.3"
 
-"@nrwl/cli@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/cli/download/@nrwl/cli-12.3.5.tgz#15a4011990cc8cfae660addc7abcf6a3f7402107"
-  integrity sha1-FaQBGZDMjPrmYK3cerz2o/dAIQc=
+"@nrwl/cli@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/cli/download/@nrwl/cli-12.3.6.tgz#72718eb6f99808ee1bba047643e7cd09b1e346f4"
+  integrity sha1-cnGOtvmYCO4bugR2Q+fNCbHjRvQ=
   dependencies:
-    "@nrwl/tao" "12.3.5"
+    "@nrwl/tao" "12.3.6"
     chalk "4.1.0"
     v8-compile-cache "2.3.0"
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
-"@nrwl/cypress@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/cypress/download/@nrwl/cypress-12.3.5.tgz#48ff40fff72cc6a73b2b6882e5cb5d8b70050531"
-  integrity sha1-SP9A//csxqc7K2iC5ctdi3AFBTE=
+"@nrwl/cypress@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/cypress/download/@nrwl/cypress-12.3.6.tgz#6399f4c298f12a8333e6cbc9562c54de1183226b"
+  integrity sha1-Y5n0wpjxKoMz5svJVixU3hGDIms=
   dependencies:
     "@cypress/webpack-preprocessor" "~4.1.2"
-    "@nrwl/devkit" "12.3.5"
-    "@nrwl/linter" "12.3.5"
-    "@nrwl/workspace" "12.3.5"
+    "@nrwl/devkit" "12.3.6"
+    "@nrwl/linter" "12.3.6"
+    "@nrwl/workspace" "12.3.6"
     fork-ts-checker-webpack-plugin "^3.1.1"
     rxjs "^6.5.4"
     ts-loader "5.4.5"
@@ -1715,54 +1715,54 @@
     webpack-node-externals "1.7.2"
     yargs-parser "20.0.0"
 
-"@nrwl/devkit@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/devkit/download/@nrwl/devkit-12.3.5.tgz#5b1a9382f9a51f12ce133a95eb4d6731fc2cda03"
-  integrity sha1-WxqTgvmlHxLOEzqV601nMfws2gM=
+"@nrwl/devkit@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/devkit/download/@nrwl/devkit-12.3.6.tgz#1b12242f617e3cf3a3fa5345857a6eaaba93c83e"
+  integrity sha1-GxIkL2F+PPOj+lNFhXpuqrqTyD4=
   dependencies:
-    "@nrwl/tao" "12.3.5"
+    "@nrwl/tao" "12.3.6"
     ejs "^3.1.5"
     ignore "^5.0.4"
     semver "7.3.4"
     strip-json-comments "^3.1.1"
     tslib "^2.0.0"
 
-"@nrwl/eslint-plugin-nx@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/eslint-plugin-nx/download/@nrwl/eslint-plugin-nx-12.3.5.tgz#c57b9895508cbe5ec7c32eebcd590d6dd119da6f"
-  integrity sha1-xXuYlVCMvl7Hwy7rzVkNbdEZ2m8=
+"@nrwl/eslint-plugin-nx@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/eslint-plugin-nx/download/@nrwl/eslint-plugin-nx-12.3.6.tgz#e92247d3e06dd4d8ef20ad1258329cd44b40a7de"
+  integrity sha1-6SJH0+Bt1NjvIK0SWDKc1EtAp94=
   dependencies:
-    "@nrwl/devkit" "12.3.5"
-    "@nrwl/workspace" "12.3.5"
+    "@nrwl/devkit" "12.3.6"
+    "@nrwl/workspace" "12.3.6"
     "@typescript-eslint/experimental-utils" "^4.3.0"
     confusing-browser-globals "^1.0.9"
 
-"@nrwl/jest@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/jest/download/@nrwl/jest-12.3.5.tgz#6e74902cc290b8a7c6cdcf937d4634c4befea59e"
-  integrity sha1-bnSQLMKQuKfGzc+TfUY0xL7+pZ4=
+"@nrwl/jest@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/jest/download/@nrwl/jest-12.3.6.tgz#ebeaa019cfd17e0347646991b67db792c85a95f0"
+  integrity sha1-6+qgGc/RfgNHZGmRtn23kshalfA=
   dependencies:
-    "@nrwl/devkit" "12.3.5"
+    "@nrwl/devkit" "12.3.6"
     jest-resolve "^26.6.2"
     rxjs "^6.5.4"
     strip-json-comments "^3.1.1"
     tslib "^2.0.0"
 
-"@nrwl/linter@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/linter/download/@nrwl/linter-12.3.5.tgz#3224926a936b60e31c74b63efd7c97fce511610a"
-  integrity sha1-MiSSapNrYOMcdLY+/XyX/OURYQo=
+"@nrwl/linter@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/linter/download/@nrwl/linter-12.3.6.tgz#fe18cbca77f7480c4f595ebc45d440ed508d3037"
+  integrity sha1-/hjLynf3SAxPWV68RdRA7VCNMDc=
   dependencies:
-    "@nrwl/devkit" "12.3.5"
+    "@nrwl/devkit" "12.3.6"
     glob "7.1.4"
     minimatch "3.0.4"
     tmp "~0.2.1"
     tslib "^2.0.0"
 
-"@nrwl/tao@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/tao/download/@nrwl/tao-12.3.5.tgz#7cbc65a561e5f9255403dc55bddf0f9a6743397c"
-  integrity sha1-fLxlpWHl+SVUA9xVvd8PmmdDOXw=
+"@nrwl/tao@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/tao/download/@nrwl/tao-12.3.6.tgz#47709cd16312cf87d57a895dcc5eca27e78b44b1"
+  integrity sha1-R3Cc0WMSz4fVeoldzF7KJ+eLRLE=
   dependencies:
     chalk "4.1.0"
     enquirer "~2.3.6"
@@ -1775,15 +1775,15 @@
     tslib "^2.0.0"
     yargs-parser "20.0.0"
 
-"@nrwl/workspace@12.3.5":
-  version "12.3.5"
-  resolved "https://registry.nlark.com/@nrwl/workspace/download/@nrwl/workspace-12.3.5.tgz#1e3c0ba31bf45ba18a958a7bf99b938631eae9eb"
-  integrity sha1-HjwLoxv0W6GKlYp7+ZuThjHq6es=
+"@nrwl/workspace@12.3.6":
+  version "12.3.6"
+  resolved "https://registry.nlark.com/@nrwl/workspace/download/@nrwl/workspace-12.3.6.tgz#4b78e08284312726861a5a50ca2bc50243ea041a"
+  integrity sha1-S3jggoQxJyaGGlpQyivFAkPqBBo=
   dependencies:
-    "@nrwl/cli" "12.3.5"
-    "@nrwl/devkit" "12.3.5"
-    "@nrwl/jest" "12.3.5"
-    "@nrwl/linter" "12.3.5"
+    "@nrwl/cli" "12.3.6"
+    "@nrwl/devkit" "12.3.6"
+    "@nrwl/jest" "12.3.6"
+    "@nrwl/linter" "12.3.6"
     chalk "4.1.0"
     cosmiconfig "^4.0.0"
     dotenv "8.2.0"
@@ -1795,7 +1795,6 @@
     minimatch "3.0.4"
     npm-run-all "^4.1.5"
     open "^7.4.2"
-    resolve "1.17.0"
     rxjs "^6.5.4"
     semver "7.3.4"
     strip-json-comments "^3.1.1"
@@ -1820,13 +1819,13 @@
     "@angular-devkit/schematics" "12.0.0"
     jsonc-parser "3.0.0"
 
-"@schematics/angular@~12.0.0":
-  version "12.0.2"
-  resolved "https://registry.nlark.com/@schematics/angular/download/@schematics/angular-12.0.2.tgz#bccde04cb1a607f9dae4547482f066412741fa91"
-  integrity sha1-vM3gTLGmB/na5FR0gvBmQSdB+pE=
+"@schematics/angular@^12.0.0":
+  version "12.0.3"
+  resolved "https://registry.nlark.com/@schematics/angular/download/@schematics/angular-12.0.3.tgz?cache=0&sync_timestamp=1622757647374&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40schematics%2Fangular%2Fdownload%2F%40schematics%2Fangular-12.0.3.tgz#00f7f1c6c6ae527dd7cfd36c1426238995f98620"
+  integrity sha1-APfxxsauUn3Xz9NsFCYjiZX5hiA=
   dependencies:
-    "@angular-devkit/core" "12.0.2"
-    "@angular-devkit/schematics" "12.0.2"
+    "@angular-devkit/core" "12.0.3"
+    "@angular-devkit/schematics" "12.0.3"
     jsonc-parser "3.0.0"
 
 "@sinonjs/commons@^1.7.0":
@@ -9009,13 +9008,6 @@ resolve-url@^0.2.1:
   version "0.2.1"
   resolved "https://registry.npm.taobao.org/resolve-url/download/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
-
-resolve@1.17.0:
-  version "1.17.0"
-  resolved "https://registry.nlark.com/resolve/download/resolve-1.17.0.tgz?cache=0&sync_timestamp=1618846903792&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fresolve%2Fdownload%2Fresolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
-  integrity sha1-sllBtUloIxzC0bt2p5y38sC/hEQ=
-  dependencies:
-    path-parse "^1.0.6"
 
 resolve@1.20.0, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.18.1:
   version "1.20.0"
