@@ -121,8 +121,7 @@ jobs:
       - store_artifacts:
           path: coverage
       - codacy/send_report:
-          coverage-reports:
-            - coverage/apps/soundcloud/lcov.info
+          coverage-reports: coverage/apps/soundcloud/lcov.info
           project-token: $CODACY_PROJECT_TOKEN
       - codecov/upload:
           file: coverage/**/lcov.info
