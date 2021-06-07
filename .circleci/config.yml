@@ -5,6 +5,7 @@
 version: 2
 
 orbs:
+  node: circleci/node@4.5.0
   coverage-reporter: codacy/coverage-reporter@12.1.7
 
 defaults: &defaults
@@ -119,7 +120,7 @@ jobs:
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
       - coverage-reporter/send_report:
           coverage-reports: 'coverage/clover.xml, coverage/lcov.info'
-          project-token: 62c75ec63bee4e4e9b9c2d40c86e478f
+          project-token: $CODACY_PROJECT_TOKEN
   e2e:
     <<: *defaults
     steps:
