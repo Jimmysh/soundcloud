@@ -124,7 +124,7 @@ jobs:
           coverage-reports: 'coverage/**/lcov.info'
           project-token: $CODACY_PROJECT_TOKEN
       - codecov/upload:
-          file: { { coverage_report_filepath } }
+          file: { { lcov.info } }
 
   e2e:
     <<: *defaults
