@@ -26,6 +26,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "clean": "git clean -dxf",
     "dev:ssr": "ng run soundcloud:serve-ssr",
     "serve:ssr": "node dist/soundcloud/server/main.js",
     "build:ssr": "ng build && ng run soundcloud:server",
