@@ -1,4 +1,4 @@
-# Soundcloud1
+# Soundcloud
 
 [![CircleCI](https://circleci.com/gh/Jimmysh/soundcloud/tree/master.svg?style=svg)](https://circleci.com/gh/Jimmysh/soundcloud/tree/master)
 [![codecov](https://codecov.io/gh/Jimmysh/soundcloud/branch/master/graph/badge.svg?token=V53R84BX4P)](https://codecov.io/gh/Jimmysh/soundcloud)
