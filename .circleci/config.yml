@@ -6,7 +6,6 @@ version: 2.1
 
 orbs:
   codecov: codecov/codecov@1.2.3
-  codacy: codacy/coverage-reporter@12.1.7
 
 defaults: &defaults
   working_directory: ~/repo
@@ -30,6 +29,7 @@ set_env: &set_env
       then
         mkdir dist && git rev-parse HEAD~1 > dist/last-deploy.txt
       fi
+      echo "from file"
       echo 'export AFFECTED_ARGS="--base $(cat dist/last-deploy.txt)"' >> $BASH_ENV
     fi
     source $BASH_ENV
@@ -43,6 +43,14 @@ yarn_cache: &yarn_cache
 
 deploy_cache: &deploy_cache
   key: last-deploy-sha
+  paths:
+    - coverage
+    - dist/last-deploy.txt
+
+coverage_cache: &coverage_cache
+  key: cache-coverage
+  paths:
+    - coverage
 
 yarn_install: &yarn_install
   name: Install Dependencies
@@ -107,18 +115,16 @@ jobs:
     steps:
       - checkout
       - run: ls
-      - restore_cache:
-          <<: *deploy_cache
+      - restore_cache: *deploy_cache
+      - restore_cache: *coverage_cache
       - run:
           <<: *set_env
       - restore_cache:
           <<: *yarn_cache
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
+      - save_cache: *coverage_cache
       - store_artifacts:
           path: coverage
-      - codacy/send_report:
-          coverage-reports: coverage/apps/soundcloud/lcov.info
-          project-token: $CODACY_PROJECT_TOKEN
       - codecov/upload:
           file: coverage/**/lcov.info
 
