@@ -41,7 +41,7 @@ yarn_cache: &yarn_cache
     - node-deps-node12-
 
 deploy_cache: &deploy_cache
-  key: last-deploy-sha
+  key: last-deploy-sha-commit
 coverage_cache: &coverage_cache
   key: cache-coverage
   paths:
@@ -155,7 +155,7 @@ jobs:
       - run: git rev-parse HEAD > dist/last-deploy.txt
       - run: cat dist/last-deploy.txt
       - save_cache:
-          key: last-deploy-sha
+          key: last-deploy-sha-commit
           paths:
             - dist/last-deploy.txt
 
