@@ -106,7 +106,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - ls coverage
+      - run: ls coverage
       - restore_cache:
           <<: *deploy_cache
       - run:
