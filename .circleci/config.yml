@@ -110,11 +110,14 @@ jobs:
       - checkout
       - restore_cache:
           <<: *deploy_cache
+          <<: *coverage_cache
       - run:
           <<: *set_env
       - restore_cache:
           <<: *yarn_cache
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
+      - save_cache:
+          <<: *coverage_cache
       - store_artifacts:
           path: coverage
       - codacy/send_report:
