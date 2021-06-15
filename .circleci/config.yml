@@ -16,7 +16,6 @@ set_env: &set_env
   name: Setup Environment Variables
   command: |
     env
-    cat dist/last-deploy.txt
     if [[ $CIRCLE_PULL_REQUEST ]]
     then
       echo 'Fetching Base Commit from GitHub'
@@ -156,6 +155,7 @@ jobs:
       - restore_cache:
           key: build-{{ .Environment.CIRCLE_WORKFLOW_ID }}
       - run: yarn affected -- --target deploy ${AFFECTED_ARGS}
+      - run: cat dist/last-deploy.txt
       - run: git rev-parse HEAD
       - run: git rev-parse HEAD > dist/last-deploy.txt
       - run: cat dist/last-deploy.txt
