@@ -151,6 +151,7 @@ jobs:
       - run: yarn affected -- --target deploy ${AFFECTED_ARGS}
       - run: git rev-parse HEAD
       - run: git rev-parse HEAD > dist/last-deploy.txt
+      - run: cat dist/last-deploy.txt
       - save_cache:
           key: last-deploy-sha
           paths:
