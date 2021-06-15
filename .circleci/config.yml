@@ -44,7 +44,6 @@ yarn_cache: &yarn_cache
 deploy_cache: &deploy_cache
   key: last-deploy-sha
   paths:
-    - coverage
     - dist/last-deploy.txt
 
 coverage_cache: &coverage_cache
@@ -159,10 +158,7 @@ jobs:
       - run: git rev-parse HEAD
       - run: git rev-parse HEAD > dist/last-deploy.txt
       - run: cat dist/last-deploy.txt
-      - save_cache:
-          key: last-deploy-sha
-          paths:
-            - dist/last-deploy.txt
+      - save_cache: *deploy_cache
 
 workflows:
   version: 2
