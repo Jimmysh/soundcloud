@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2.1
+version: 2
 
 orbs:
   codecov: codecov/codecov@1.2.3
@@ -42,6 +42,8 @@ yarn_cache: &yarn_cache
 
 deploy_cache: &deploy_cache
   key: last-deploy-sha-commit
+  paths:
+    - dist/last-deploy.txt
 coverage_cache: &coverage_cache
   key: cache-coverage
   paths:
@@ -157,10 +159,7 @@ jobs:
       - run: git rev-parse HEAD
       - run: git rev-parse HEAD > dist/last-deploy.txt
       - run: cat dist/last-deploy.txt
-      - save_cache:
-          key: last-deploy-sha-commit
-          paths:
-            - dist/last-deploy.txt
+      - save_cache: *deploy_cache
 
 workflows:
   version: 2
