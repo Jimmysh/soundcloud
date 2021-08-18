@@ -4,4 +4,12 @@ import { githabAPI } from './github-api';
 
 const { GITHUB_GIST_ID } = env;
 
-githabAPI.get(`/gists/${GITHUB_GIST_ID}`);
+const getList = async () => {
+  // let info
+  try {
+    const info = await githabAPI.get(`/gists/${GITHUB_GIST_ID}`);
+    console.log(info);
+  } catch (error) {}
+};
+
+getList();
