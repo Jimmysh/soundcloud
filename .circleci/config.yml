@@ -16,7 +16,6 @@ defaults: &defaults
 set_env: &set_env
   name: Setup Environment Variables
   command: |
-    env
     if [[ $CIRCLE_PULL_REQUEST ]]
     then
       echo 'Fetching Base Commit from GitHub'
@@ -60,6 +59,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - env
       - restore_cache:
           <<: *yarn_cache
       - run:
