@@ -54,7 +54,7 @@ interface Config {
   baseRef: string;
   headRef: string;
   isPullRequest?: boolean;
-  sha?: string;
+  baseSha?: string;
 }
 export const setNxEnvUseGist = async (config: Config) => {
   const { mode, baseRef, headRef, isPullRequest } = config;
@@ -68,14 +68,15 @@ export const setNxEnvUseGist = async (config: Config) => {
     headConfig = { ...baseConfig };
   }
 
-  if (!config.sha) {
-    config.sha = execSync('git rev-parse HEAD~1').toString();
+  const _mode: keyof BranchSHA = mode as any;
+  let sha = headConfig[_mode] || baseConfig[_mode] || config.baseSha;
+
+  if (!sha) {
+    sha = execSync('git rev-parse HEAD~1').toString();
   }
 
-  const _mode: keyof BranchSHA = mode as any;
-  headConfig[_mode] = headConfig[_mode] || baseConfig[_mode] || config.sha;
-  const AFFECTED_ARGS = `--base ${headConfig[_mode]}`;
-  console.log(AFFECTED_ARGS);
+  const AFFECTED_ARGS = `--base ${sha}`;
+  return { AFFECTED_ARGS };
 };
 
 // yarn run:tools tools/github/set-env.ts

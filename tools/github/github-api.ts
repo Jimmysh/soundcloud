@@ -12,7 +12,6 @@ if (GITHUB_ACCESS_TOKEN) {
 }
 
 export const githabAPI = axios.create({
-  baseURL: GITHUB_API_URL,
-  timeout: 1000,
+  baseURL: GITHUB_API_URL || 'https://api.github.com',
   headers
 });

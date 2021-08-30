@@ -59,7 +59,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - env
       - restore_cache:
           <<: *yarn_cache
       - run:
