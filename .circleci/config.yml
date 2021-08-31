@@ -48,7 +48,7 @@ yarn_cache: &yarn_cache
     - last-yarn-{{ .Environment.CACHE_LEVE_4 }}
 
 save_yarn_cache: &save_yarn_cache
-  name: yarn_cache
+  name: save_yarn_cache
   key: last-yarn-{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - ~/.cache
