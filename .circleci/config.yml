@@ -35,6 +35,7 @@ set_env: &set_env
     echo $AFFECTED_ARGS
 
 yarn_cache: &yarn_cache
+  name: yarn_cache
   keys:
     - last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
     - last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
@@ -42,6 +43,7 @@ yarn_cache: &yarn_cache
     - last-yarn-1|
 
 save_yarn_cache: &save_yarn_cache
+  name: yarn_cache
   key: last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - ~/.cache
@@ -50,6 +52,7 @@ save_yarn_cache: &save_yarn_cache
     - dist/libs
 
 deploy_cache: &deploy_cache
+  name: deploy_cache
   keys:
     - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
     - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
@@ -57,11 +60,13 @@ deploy_cache: &deploy_cache
     - last-deploy-1|
 
 save_deploy_cache: &save_deploy_cache
+  name: save_deploy_cache
   key: last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - dist/last-deploy.txt
 
 build_cache: &build_cache
+  name: build_cache
   keys:
     - last-build-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
     - last-build-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
@@ -69,12 +74,14 @@ build_cache: &build_cache
     - last-build-1|
 
 save_build_cache: &save_build_cache
+  name: save_build_cache
   key: last-build-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - dist/apps
     - dist/libs
 
 coverage_cache: &coverage_cache
+  name: coverage_cache
   keys:
     - last-coverage-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
     - last-coverage-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
@@ -84,6 +91,7 @@ coverage_cache: &coverage_cache
     - coverage
 
 save_coverage_cache: &save_coverage_cache
+  name: save_coverage_cache
   key: last-coverage-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - coverage
