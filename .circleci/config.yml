@@ -27,7 +27,7 @@ set_env: &set_env
       echo 'Fetching Base Commit from Deploy Cache'
       if [[ ! -f dist/last-deploy.txt ]]
       then
-        mkdir -p dist && git rev-parse HEAD~1 > dist/last-deploy.txt
+        mkdir -p dist && git rev-list --max-parents=0 HEAD > dist/last-deploy.txt
       fi
       echo 'export AFFECTED_ARGS="--base $(cat dist/last-deploy.txt)"' >> $BASH_ENV
     fi
@@ -54,14 +54,14 @@ save_yarn_cache: &save_yarn_cache
 deploy_cache: &deploy_cache
   name: deploy_cache
   keys:
-    - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
-    - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|
-    - last-deploy-1|
+    - last-deploy-2|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+    - last-deploy-2|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
+    - last-deploy-2|{{ .Environment.CIRCLE_BRANCH }}|
+    - last-deploy-2|
 
 save_deploy_cache: &save_deploy_cache
   name: save_deploy_cache
-  key: last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+  key: last-deploy-2|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - dist/last-deploy.txt
 
