@@ -38,9 +38,9 @@ yarn_cache: &yarn_cache
   name: Restore yarn cache
   keys:
     - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
-    - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|
-    - last-yarn-{{ checksum "yarn.lock" }}|
+    - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
+    - last-yarn-{{ checksum "yarn.lock" }}
 
 save_yarn_cache: &save_yarn_cache
   name: Save yarn cache
@@ -55,9 +55,9 @@ deploy_cache: &deploy_cache
   name: Restore deploy cache
   keys:
     - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
-    - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|
-    - last-deploy-{{ checksum "yarn.lock" }}|
+    - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
+    - last-deploy-{{ checksum "yarn.lock" }}
 
 save_deploy_cache: &save_deploy_cache
   name: Save deploy cache
@@ -69,9 +69,9 @@ build_cache: &build_cache
   name: Restore build cache
   keys:
     - last-build-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-build-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
-    - last-build-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|
-    - last-build-{{ checksum "yarn.lock" }}|
+    - last-build-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-build-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
+    - last-build-{{ checksum "yarn.lock" }}
 
 save_build_cache: &save_build_cache
   name: Save build cache
@@ -84,9 +84,9 @@ coverage_cache: &coverage_cache
   name: Restore coverage cache
   keys:
     - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
-    - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|
-    - last-coverage-{{ checksum "yarn.lock" }}|
+    - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
+    - last-coverage-{{ checksum "yarn.lock" }}
 
 save_coverage_cache: &save_coverage_cache
   name: Save coverage cache
