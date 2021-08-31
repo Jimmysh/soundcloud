@@ -40,6 +40,9 @@ yarn_cache: &yarn_cache
     - last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
     - last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|
     - last-yarn-1|
+
+save_yarn_cache: &save_yarn_cache
+  key: last-yarn-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - ~/.cache
     - node_modules
@@ -52,6 +55,9 @@ deploy_cache: &deploy_cache
     - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
     - last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|
     - last-deploy-1|
+
+save_deploy_cache: &save_deploy_cache
+  key: last-deploy-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - dist/last-deploy.txt
 
@@ -61,6 +67,9 @@ build_cache: &build_cache
     - last-build-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
     - last-build-1|{{ .Environment.CIRCLE_BRANCH }}|
     - last-build-1|
+
+save_build_cache: &save_build_cache
+  key: last-build-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - dist/apps
     - dist/libs
@@ -74,6 +83,11 @@ coverage_cache: &coverage_cache
   paths:
     - coverage
 
+save_coverage_cache: &save_coverage_cache
+  key: last-coverage-1|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+  paths:
+    - coverage
+
 yarn_install: &yarn_install
   name: Install Dependencies
   command: yarn install --frozen-lockfile
@@ -83,66 +97,48 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - run:
-          <<: *yarn_install
-      - save_cache:
-          <<: *yarn_cache
+      - restore_cache: *yarn_cache
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache
 
   check-formatting:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: yarn format:check ${AFFECTED_ARGS}
   lint:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: ./node_modules/.bin/nx workspace-lint
       - run: yarn affected:lint ${AFFECTED_ARGS} --parallel
   build:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: yarn affected:build -- ${AFFECTED_ARGS} --parallel --configuration production
-      - save_cache:
-          <<: *build_cache
+      - save_cache: *save_build_cache
       - store_artifacts:
           path: dist
   test:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
-      - save_cache:
-          <<: *coverage_cache
+      - save_cache: *save_coverage_cache
       - store_artifacts:
           path: coverage
       - codecov/upload:
@@ -152,12 +148,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: yarn affected:e2e -- ${AFFECTED_ARGS} --configuration production -- --headless
       - store_artifacts:
           path: dist/cypress
@@ -166,19 +159,15 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          <<: *yarn_cache
-      - restore_cache:
-          <<: *deploy_cache
-      - run:
-          <<: *set_env
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
       - run: yarn affected -- --target deploy ${AFFECTED_ARGS}
       - run: cat dist/last-deploy.txt
       - run: git rev-parse HEAD
       - run: git rev-parse HEAD > dist/last-deploy.txt
       - run: cat dist/last-deploy.txt
-      - save_cache:
-          <<: *deploy_cache
+      - save_cache: *save_deploy_cache
 
 workflows:
   version: 2
