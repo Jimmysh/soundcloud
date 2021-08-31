@@ -111,6 +111,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: echo ${CACHE_LEVE_1}
+      - run: echo ${CACHE_LEVE_2}
+      - run: echo ${CACHE_LEVE_3}
+      - run: echo ${CACHE_LEVE_4}
       - restore_cache: *yarn_cache
       - run: *yarn_install
       - save_cache: *save_yarn_cache
