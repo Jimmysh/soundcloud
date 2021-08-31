@@ -12,9 +12,15 @@
   "npmScope": "soundcloud",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "accessToken": "NzJkN2FmZTYtMWI4ZS00YjBiLThmZjAtNzIwM2RlZjU5OWNlfHJlYWQtd3JpdGU="
       }
     }
   },
@@ -24,7 +30,9 @@
     },
     "soundcloud-e2e": {
       "tags": [],
-      "implicitDependencies": ["soundcloud"]
+      "implicitDependencies": [
+        "soundcloud"
+      ]
     }
   }
 }

@@ -47,6 +47,7 @@
     "@angular/router": "12.0.0",
     "@nguniversal/express-engine": "12.0.0",
     "@nrwl/angular": "12.3.6",
+    "@nrwl/nx-cloud": "^12.3.10",
     "express": "^4.15.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
