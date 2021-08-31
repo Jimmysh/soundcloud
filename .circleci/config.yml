@@ -87,8 +87,6 @@ coverage_cache: &coverage_cache
     - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|
     - last-coverage-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|
     - last-coverage-{{ checksum "yarn.lock" }}|
-  paths:
-    - coverage
 
 save_coverage_cache: &save_coverage_cache
   name: Save coverage cache
