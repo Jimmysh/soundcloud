@@ -37,7 +37,7 @@ coverage_cache: &coverage_cache
     - coverage
 yarn_install: &yarn_install
   name: Install Dependencies
-  command: yarn install --frozen-lockfile --non-interactive
+  command: yarn install --frozen-lockfile
 
 jobs:
   install:
