@@ -143,7 +143,6 @@ jobs:
       - checkout
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
-      - restore_cache: *deploy_cache
       - run: *set_env
       - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
       - save_cache: *save_coverage_cache
@@ -171,10 +170,12 @@ jobs:
       - restore_cache: *deploy_cache
       - run: *set_env
       - run: yarn affected -- --target deploy ${AFFECTED_ARGS}
-      - run: cat dist/last-deploy.txt
-      - run: git rev-parse HEAD
-      - run: git rev-parse HEAD > dist/last-deploy.txt
-      - run: cat dist/last-deploy.txt
+      - run: |
+          echo $AFFECTED_ARGS
+          cat dist/last-deploy.txt
+          git rev-parse HEAD
+          git rev-parse HEAD > dist/last-deploy.txt
+          cat dist/last-deploy.txt
       - save_cache: *save_deploy_cache
 
 workflows:
