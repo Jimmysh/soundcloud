@@ -12,10 +12,10 @@ defaults: &defaults
   docker:
     - image: circleci/node:12-browsers
   environment:
-    - CACHE_LEVE_1: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - CACHE_LEVE_2: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
-    - CACHE_LEVE_3: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}
-    - CACHE_LEVE_4: node12|{{ checksum "yarn.lock" }
+    CACHE_LEVE_1: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+    CACHE_LEVE_2: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    CACHE_LEVE_3: node12|{{ checksum "yarn.lock" }|{{ .Environment.CIRCLE_BRANCH }}
+    CACHE_LEVE_4: node12|{{ checksum "yarn.lock" }
 
 set_env: &set_env
   name: Setup Environment Variables
