@@ -1,6 +1,6 @@
 {
   "name": "soundcloud",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
@@ -30,7 +30,9 @@
     "dev:ssr": "ng run soundcloud:serve-ssr",
     "serve:ssr": "node dist/soundcloud/server/main.js",
     "build:ssr": "ng build && ng run soundcloud:server",
-    "prerender": "ng run soundcloud:prerender"
+    "prerender": "ng run soundcloud:prerender",
+    "build:tools": "tsc -p ./tools/tsconfig.tools.json",
+    "run:tools": "ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register"
   },
   "private": true,
   "dependencies": {
@@ -81,6 +83,7 @@
     "prettier": "2.2.1",
     "ts-jest": "26.5.5",
     "ts-node": "~9.1.1",
-    "typescript": "~4.2.4"
+    "typescript": "~4.2.4",
+    "yargs": "^17.1.1"
   }
 }
