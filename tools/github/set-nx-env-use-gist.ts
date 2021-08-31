@@ -3,12 +3,6 @@ import { env } from 'process';
 
 import { githabAPI } from './github-api';
 
-const { GITHUB_GIST_ID } = env;
-
-if (!GITHUB_GIST_ID) {
-  throw new Error('请在环境变量中设置 GITHUB_GIST_ID');
-}
-
 interface Gist {
   files: {
     [name: string]: {
@@ -31,7 +25,7 @@ interface BranchEnv {
 }
 
 function getGistConfig(): Promise<BranchEnv> {
-  return githabAPI.get<Gist>(`/gists/${GITHUB_GIST_ID}`).then(d => {
+  return githabAPI.get<Gist>(`/gists/${env.GITHUB_GIST_ID}`).then(d => {
     const back: BranchEnv = {};
     for (const key in d.data.files) {
       if (Object.prototype.hasOwnProperty.call(d.data.files, key)) {
@@ -57,6 +51,9 @@ interface Config {
   baseSha?: string;
 }
 export const setNxEnvUseGist = async (config: Config) => {
+  if (!env.GITHUB_GIST_ID) {
+    throw new Error('请在环境变量中设置 GITHUB_GIST_ID');
+  }
   const { mode, baseRef, headRef, isPullRequest } = config;
   const gistConfig = await getGistConfig();
   let headConfig = gistConfig[baseRef];
@@ -76,7 +73,7 @@ export const setNxEnvUseGist = async (config: Config) => {
   }
 
   const AFFECTED_ARGS = `--base ${sha}`;
-  return { AFFECTED_ARGS };
+  console.log(AFFECTED_ARGS);
 };
 
 // yarn run:tools tools/github/set-env.ts
