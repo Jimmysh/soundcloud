@@ -41,6 +41,7 @@ yarn_cache: &yarn_cache
     - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
     - last-yarn-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
     - last-yarn-{{ checksum "yarn.lock" }}
+    - last-yarn-
 
 save_yarn_cache: &save_yarn_cache
   name: Save yarn cache
@@ -57,6 +58,7 @@ deploy_cache: &deploy_cache
     - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}|{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
     - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}|{{ .Environment.CIRCLE_WORKFLOW_ID }}
     - last-deploy-{{ checksum "yarn.lock" }}|{{ .Environment.CIRCLE_BRANCH }}
+    - last-deploy-{{ checksum "yarn.lock" }}
     - last-deploy-{{ checksum "yarn.lock" }}
 
 save_deploy_cache: &save_deploy_cache
