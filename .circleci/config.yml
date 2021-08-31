@@ -68,6 +68,7 @@ jobs:
           paths:
             - ~/.cache
             - node_modules
+            - dist/tools
   check-formatting:
     <<: *defaults
     steps:
