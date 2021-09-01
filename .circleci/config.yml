@@ -236,15 +236,17 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
-      - restore_cache: *build_cache
       - run: *yarn_install
       - run: *format_check
       - run: *lint
+      - restore_cache: *test_cache
       - run: *affected_test
       - store_test_results: *store_test_results
       - store_artifacts: *store_artifacts_test
+      - restore_cache: *e2e_cache
       - run: *affected_e2e
       - store_artifacts: *store_artifacts_e2e
+      - restore_cache: *build_cache
       - run: *affected_build
       - store_artifacts: *store_artifacts_apps
       - store_artifacts: *store_artifacts_libs
