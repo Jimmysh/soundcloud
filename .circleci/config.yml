@@ -179,7 +179,7 @@ commands:
   codecov_upload:
     steps:
       - codecov/upload:
-        file: coverage/**/lcov.info
+          file: coverage/**/lcov.info
 
 jobs:
   install:
