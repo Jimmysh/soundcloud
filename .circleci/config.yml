@@ -181,9 +181,12 @@ commands:
       - codecov/upload:
           file: coverage/**/lcov.info
   deplay_to_heroku:
+    parameters:
+      app-name:
+        type: string
     steps:
       - heroku/install
-      - run: node dist/tools/heroku/deploy.js
+      - run: node dist/tools/heroku/deploy.js --app-name << parameters.app-name >>
 
 jobs:
   install:
@@ -259,6 +262,7 @@ jobs:
       - store_artifacts: *store_artifacts_apps
       - store_artifacts: *store_artifacts_libs
       - deplay_to_heroku
+            app-name: {{ .Environment.CIRCLE_PROJECT_REPONAME }}-<< pipeline.git.branch >>-<< pipeline.number >>
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache
       - save_cache: *save_test_cache
