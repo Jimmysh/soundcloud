@@ -250,7 +250,7 @@ workflows:
   check_pull_request:
     when:
       and:
-        - not: [master]
+        - not: master
 
   check_and_deploy:
     when:
