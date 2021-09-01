@@ -136,11 +136,11 @@ update_deploy: &update_deploy
     cat dist/last-deploy.txt
 
 store_test_results: &store_test_results
-  path: dist/coverage
+  path: coverage
   destination: coverage
 
 store_artifacts_test: &store_artifacts_test
-  path: dist/coverage
+  path: coverage
   destination: coverage
 
 store_artifacts_apps: &store_artifacts_apps
