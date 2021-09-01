@@ -41,7 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/soundcloud/browser",
+            "outputPath": "dist/apps/soundcloud/browser",
             "index": "apps/soundcloud/src/index.html",
             "main": "apps/soundcloud/src/main.ts",
             "polyfills": "apps/soundcloud/src/polyfills.ts",
@@ -119,7 +119,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/soundcloud/server",
+            "outputPath": "dist/apps/soundcloud/server",
             "main": "apps/soundcloud/server.ts",
             "tsConfig": "apps/soundcloud/tsconfig.server.json",
             "inlineStyleLanguage": "scss"
