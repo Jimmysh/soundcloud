@@ -84,19 +84,33 @@ save_build_cache: &save_build_cache
     - dist/apps
     - dist/libs
 
-coverage_cache: &coverage_cache
-  name: Restore coverage cache
+test_cache: &test_cache
+  name: Restore test cache
   keys:
-    - last-coverage-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
-    - last-coverage-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}
-    - last-coverage-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}
-    - last-coverage-{{ checksum "yarn.lock" }}
+    - last-test-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+    - last-test-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-test-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}
+    - last-test-{{ checksum "yarn.lock" }}
 
-save_coverage_cache: &save_coverage_cache
-  name: Save coverage cache
-  key: last-coverage-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+save_test_cache: &save_test_cache
+  name: Save test cache
+  key: last-test-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
   paths:
     - coverage
+
+e2e_cache: &e2e_cache
+  name: Restore e2e cache
+  keys:
+    - last-e2e-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+    - last-e2e-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}
+    - last-e2e-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}
+    - last-e2e-{{ checksum "yarn.lock" }}
+
+save_e2e_cache: &save_e2e_cache
+  name: Save e2e cache
+  key: last-e2e-{{ checksum "yarn.lock" }}-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_WORKFLOW_ID }}-{{ .Environment.CIRCLE_WORKFLOW_JOB_ID }}
+  paths:
+    - dist/cypress
 
 # install
 yarn_install: &yarn_install
@@ -186,6 +200,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
+      - restore_cache: *build_cache
       - run: *affected_build
       - save_cache: *save_build_cache
       - store_artifacts: *store_artifacts_apps
@@ -195,8 +210,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
+      - restore_cache: *test_cache
       - run: *affected_test
-      - save_cache: *save_coverage_cache
+      - save_cache: *save_test_cache
       - store_test_results: *store_test_results
       - store_artifacts: *store_artifacts_test
       - codecov/upload:
@@ -205,7 +221,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
+      - restore_cache: *e2e_cache
       - run: *affected_e2e
+      - save_cache: *save_e2e_cache
       - store_artifacts: *store_artifacts_e2e
 
   deploy:
@@ -219,6 +237,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
+      - restore_cache: *build_cache
       - run: *yarn_install
       - run: *format_check
       - run: *lint
@@ -231,7 +250,8 @@ jobs:
       - store_artifacts: *store_artifacts_libs
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache
-      - save_cache: *save_coverage_cache
+      - save_cache: *save_test_cache
+      - save_cache: *save_e2e_cache
 
 workflows:
   version: 2
