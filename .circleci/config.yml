@@ -159,12 +159,12 @@ update_deploy: &update_deploy
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    <<: *defaults
     steps:
       - name: Trigger CircleCI
-        env:
+      - env:
           CIRCLE_BRANCH: ${{ github.head_ref }}
-        run: |
+      - run: |
           curl -X POST \
           -H 'Circle-Token: ${{secrets.CIRCLE_TOKEN}}' \
           -H 'Content-Type: application/json' \
@@ -266,16 +266,15 @@ jobs:
           path: dist/libs
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache
-      - save_coverage_cache: *save_coverage_cache
+      - save_cache: *save_coverage_cache
 
 workflows:
   version: 2
   check_pull_request:
-    when:
-      and:
-        - << pipeline.vcs.is_pull_request >>
+    when: << pipeline.parameters.pull_request >>
     jobs:
       - check_pull_request
+
   check_and_deploy:
     when:
       and:
