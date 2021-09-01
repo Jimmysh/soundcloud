@@ -10,7 +10,9 @@ orbs:
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:12-browsers
+    - image: circleci/node:14-browsers
+      environment:
+        NODE_OPTIONS: --max_old_space_size=4096
 
 set_env: &set_env
   name: Setup Environment Variables
@@ -95,9 +97,56 @@ save_coverage_cache: &save_coverage_cache
   paths:
     - coverage
 
+# install
 yarn_install: &yarn_install
   name: Install dependencies
   command: yarn install --frozen-lockfile
+
+# format
+format_check: &format_check
+  name: Format check
+  command: yarn format:check ${AFFECTED_ARGS}
+
+# lint
+lint: &lint
+  name: Lint
+  command: ./node_modules/.bin/nx workspace-lint && yarn affected:lint ${AFFECTED_ARGS} --parallel
+
+affected_test: &affected_test
+  name: Afected test
+  command: yarn affected:test ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
+
+affected_build: &affected_build
+  name: Affected build
+  command: yarn affected:build ${AFFECTED_ARGS} --parallel --configuration production
+
+# e2e
+affected_e2e: &affected_e2e
+  name: Affected e2e
+  command: yarn affected:e2e ${AFFECTED_ARGS} --configuration production -- --headless
+
+# coverage
+coverage: &coverage
+  name: coverage
+  command: bash <(curl -s https://codecov.io/bash)
+
+deploy: &deploy
+  name: Deploy
+  command: |
+    echo $AFFECTED_ARGS
+    cat dist/last-deploy.txt
+    git rev-parse HEAD
+    git rev-parse HEAD > dist/last-deploy.txt
+    cat dist/last-deploy.txt
+
+update_deploy: &update_deploy
+  name: Update Deploy
+  command: |
+    echo $AFFECTED_ARGS
+    cat dist/last-deploy.txt
+    git rev-parse HEAD
+    git rev-parse HEAD > dist/last-deploy.txt
+    cat dist/last-deploy.txt
 
 jobs:
   install:
@@ -107,7 +156,6 @@ jobs:
       - restore_cache: *yarn_cache
       - run: *yarn_install
       - save_cache: *save_yarn_cache
-
   check-formatting:
     <<: *defaults
     steps:
@@ -115,7 +163,7 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: yarn format:check ${AFFECTED_ARGS}
+      - run: *format_check
   lint:
     <<: *defaults
     steps:
@@ -123,8 +171,7 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: ./node_modules/.bin/nx workspace-lint
-      - run: yarn affected:lint ${AFFECTED_ARGS} --parallel
+      - run: *lint
   build:
     <<: *defaults
     steps:
@@ -132,10 +179,12 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: yarn affected:build -- ${AFFECTED_ARGS} --parallel --configuration production
+      - run: *affected_build
       - save_cache: *save_build_cache
       - store_artifacts:
-          path: dist
+          path: dist/apps
+      - store_artifacts:
+          path: dist/libs
   test:
     <<: *defaults
     steps:
@@ -143,13 +192,12 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: yarn affected:test -- ${AFFECTED_ARGS} --parallel -- --ci --code-coverage
+      - run: *affected_test
       - save_cache: *save_coverage_cache
       - store_artifacts:
           path: coverage
       - codecov/upload:
           file: coverage/**/lcov.info
-
   e2e:
     <<: *defaults
     steps:
@@ -157,7 +205,7 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: yarn affected:e2e -- ${AFFECTED_ARGS} --configuration production -- --headless
+      - run: *affected_e2e
       - store_artifacts:
           path: dist/cypress
 
@@ -168,14 +216,19 @@ jobs:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
-      - run: yarn affected -- --target deploy ${AFFECTED_ARGS}
-      - run: |
-          echo $AFFECTED_ARGS
-          cat dist/last-deploy.txt
-          git rev-parse HEAD
-          git rev-parse HEAD > dist/last-deploy.txt
-          cat dist/last-deploy.txt
+      - run: *deploy
+      - run: *update_deploy
       - save_cache: *save_deploy_cache
+
+  check_pull_request:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache: *yarn_cache
+      - restore_cache: *deploy_cache
+      - run: *set_env
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache
 
 workflows:
   version: 2
