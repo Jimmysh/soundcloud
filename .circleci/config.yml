@@ -261,8 +261,8 @@ jobs:
       - run: *affected_build
       - store_artifacts: *store_artifacts_apps
       - store_artifacts: *store_artifacts_libs
-      - deplay_to_heroku
-            app-name: {{ .Environment.CIRCLE_PROJECT_REPONAME }}-<< pipeline.git.branch >>-<< pipeline.number >>
+      - deplay_to_heroku:
+          app-name: ${CIRCLE_PROJECT_USERNAME}-${CIRCLE_PROJECT_REPONAME}-<< pipeline.git.branch >>-<< pipeline.number >>
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache
       - save_cache: *save_test_cache
