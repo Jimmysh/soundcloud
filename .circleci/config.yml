@@ -176,6 +176,10 @@ commands:
       - restore_cache: *yarn_cache
       - restore_cache: *deploy_cache
       - run: *set_env
+  codecov_upload:
+    steps:
+      - codecov/upload:
+        file: coverage/**/lcov.info
 
 jobs:
   install:
@@ -214,8 +218,7 @@ jobs:
       - save_cache: *save_test_cache
       - store_test_results: *store_test_results
       - store_artifacts: *store_artifacts_test
-      - codecov/upload:
-          file: coverage/**/lcov.info
+      - codecov_upload
   e2e:
     <<: *defaults
     steps:
@@ -241,6 +244,7 @@ jobs:
       - run: *lint
       - restore_cache: *test_cache
       - run: *affected_test
+      - codecov_upload
       - store_test_results: *store_test_results
       - store_artifacts: *store_artifacts_test
       - restore_cache: *e2e_cache
