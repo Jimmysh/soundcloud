@@ -16,6 +16,9 @@ if (!apps.includes(appName)) {
 }
 
 shell.exec(`heroku git:clone --app ${appName}`);
+shell.cd(`${appName}`);
+const a = shell.ls('-a').stdout;
+console.log('a', a);
 // shell.rm('dist/apps/soundcloud/*.json');
 // shell.cp('apps/soundcloud/docker/**', 'dist/apps/soundcloud');
 
