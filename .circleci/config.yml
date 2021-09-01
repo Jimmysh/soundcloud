@@ -276,10 +276,7 @@ workflows:
       - check_pull_request
 
   check_and_deploy:
-    when:
-      and:
-        - equal: [master]
-
+    unless: << pipeline.parameters.pull_request >>
     jobs:
       - install
       - lint:
