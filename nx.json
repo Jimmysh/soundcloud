@@ -16,7 +16,7 @@
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ODBmNTYzM2EtNTA5ZS00NWE2LThmN2ItYmJkNDYzMDk4MGUyfHJlYWQtd3JpdGU=",
-        "runtimeCacheInputs": ["node -v", "git hash-object yarn.lock"]
+        "runtimeCacheInputs": ["node -v", "git hash-object yarn.lock", "git hash-object package.json"]
       }
     }
   },
