@@ -251,7 +251,7 @@ workflows:
     when:
       and:
         - not: master
-    jons:
+    jobs:
       - check_pull_request
 
   check_and_deploy:
