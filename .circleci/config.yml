@@ -5,7 +5,8 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@1.2.3
+  codecov: codecov/codecov@3.0.0
+  heroku: circleci/heroku@1.2.6
 
 defaults: &defaults
   working_directory: ~/repo
@@ -124,11 +125,6 @@ affected_build: &affected_build
 affected_e2e: &affected_e2e
   name: Affected e2e
   command: yarn affected:e2e ${AFFECTED_ARGS} --configuration production -- --headless
-
-# coverage
-coverage: &coverage
-  name: coverage
-  command: bash <(curl -s https://codecov.io/bash)
 
 deploy: &deploy
   name: Deploy
