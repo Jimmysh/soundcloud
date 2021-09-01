@@ -151,7 +151,6 @@ update_deploy: &update_deploy
 
 store_test_results: &store_test_results
   path: coverage
-  destination: coverage
 
 store_artifacts_test: &store_artifacts_test
   path: coverage
@@ -242,6 +241,7 @@ jobs:
       - run: *format_check
       - run: *lint
       - run: *affected_test
+      - store_test_results: *store_test_results
       - store_artifacts: *store_artifacts_test
       - run: *affected_e2e
       - store_artifacts: *store_artifacts_e2e
