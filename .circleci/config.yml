@@ -249,8 +249,8 @@ workflows:
   version: 2
   check_pull_request:
     when:
-      and:
-        - << pipeline.vcs.is_pull_request >>
+      not:
+        - equal: [master]
 
   check_and_deploy:
     when:
