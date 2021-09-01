@@ -4,6 +4,10 @@
 #
 version: 2.1
 
+on:
+  pull_request:
+    types: [opened, synchronize]
+
 orbs:
   codecov: codecov/codecov@1.2.3
 
@@ -13,6 +17,11 @@ defaults: &defaults
     - image: circleci/node:14-browsers
       environment:
         NODE_OPTIONS: --max_old_space_size=4096
+
+parameters:
+  pull_request:
+    type: boolean
+    default: false
 
 set_env: &set_env
   name: Setup Environment Variables
@@ -149,6 +158,20 @@ update_deploy: &update_deploy
     cat dist/last-deploy.txt
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger CircleCI
+        env:
+          CIRCLE_BRANCH: ${{ github.head_ref }}
+        run: |
+          curl -X POST \
+          -H 'Circle-Token: ${{secrets.CIRCLE_TOKEN}}' \
+          -H 'Content-Type: application/json' \
+          -H 'Accept: application/json' \
+          -d "{\"branch\":\"${CIRCLE_BRANCH}\",\"parameters\":{\"pull_request\":true}}" \
+          https://circleci.com/api/v2/project/gh/ORG_NAME/REPO_NAME/pipeline
+
   install:
     <<: *defaults
     steps:
@@ -250,12 +273,14 @@ workflows:
   check_pull_request:
     when:
       and:
-        - not: [master]
-
+        - << pipeline.vcs.is_pull_request >>
+    jobs:
+      - check_pull_request
   check_and_deploy:
     when:
       and:
         - equal: [master]
+
     jobs:
       - install
       - lint:
