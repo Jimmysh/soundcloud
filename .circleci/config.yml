@@ -248,6 +248,7 @@ jobs:
 workflows:
   version: 2
   check_pull_request:
+    name: Check pull request
     when:
       and:
         - not:
@@ -258,6 +259,7 @@ workflows:
       - check_pull_request
 
   check_and_deploy:
+    name: Check And Deploy
     when:
       and:
         - equal: [master, << pipeline.git.branch >>]
