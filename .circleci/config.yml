@@ -186,7 +186,7 @@ commands:
         type: string
     steps:
       - heroku/install
-      - npm run build:ssr -- --prod
+      - run: npm run build:ssr -- --prod
       - heroku/check-authentication:
           print-whoami: true
       - run: |
