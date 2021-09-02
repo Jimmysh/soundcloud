@@ -188,6 +188,9 @@ commands:
       - heroku/install
       - heroku/check-authentication:
           print-whoami: true
+      - run: |
+          git config --global user.email "hero63418@gmail.com"
+          git config --global user.name "Jimmy"
       - run: bash .circleci/heroku-setup.sh
       - run: node dist/tools/heroku/deploy.js --app-name << parameters.app-name >>
 
