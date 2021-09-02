@@ -15,7 +15,8 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "NzJkN2FmZTYtMWI4ZS00YjBiLThmZjAtNzIwM2RlZjU5OWNlfHJlYWQtd3JpdGU="
+        "accessToken": "ODBmNTYzM2EtNTA5ZS00NWE2LThmN2ItYmJkNDYzMDk4MGUyfHJlYWQtd3JpdGU=",
+        "runtimeCacheInputs": ["node -v", "git hash-object yarn.lock", "git hash-object package.json"]
       }
     }
   },
