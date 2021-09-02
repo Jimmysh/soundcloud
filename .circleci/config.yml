@@ -188,9 +188,6 @@ commands:
       - heroku/install
       - heroku/check-authentication:
           print-whoami: true
-      - add_ssh_keys:
-          fingerprints:
-            - ac:64:e1:24:35:9e:b7:4b:8a:ea:46:72:90:75:e6:79
       - run: bash .circleci/heroku-setup.sh
       - run: node dist/tools/heroku/deploy.js --app-name << parameters.app-name >>
 
