@@ -200,7 +200,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - env
+      - run: env
       - restore_cache: *yarn_cache
       - run: *yarn_install
       - save_cache: *save_yarn_cache
@@ -256,6 +256,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
+      - run: env
       - run: *yarn_install
       - run: *format_check
       - run: *lint
