@@ -3,6 +3,7 @@ import { cwd } from 'process';
 import { join } from 'path';
 import * as shell from 'shelljs';
 import * as yargs from 'yargs';
+import { existsSync } from 'fs';
 
 const argv = yargs
   .option('gitPath', { type: 'string', default: join(cwd(), 'deploy-apps') })
@@ -22,6 +23,10 @@ if (!apps.includes(appName)) {
 const cloneFilder = join(argv.gitPath, appName);
 shell.exec(`heroku git:clone --app ${appName} ${cloneFilder}`);
 
+if (!existsSync(cloneFilder)) {
+  throw new Error(`${cloneFilder} not found`);
+}
+
 shell.ls('-A', cloneFilder).forEach(d => {
   if (d !== '.git') {
     shell.rm('-rf', join(cloneFilder, d));
@@ -34,6 +39,3 @@ shell.cd(cloneFilder);
 shell.exec('git add *');
 shell.exec('git commit -m "update"');
 shell.exec('git push -f');
-
-console.log('deploy heroku !', appName);
-// yarn run:tools tools/heroku/deploy
