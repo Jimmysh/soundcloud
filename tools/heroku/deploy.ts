@@ -16,7 +16,7 @@ if (!apps.includes(appName)) {
   shell.exec(`heroku create ${appName} --buildpack heroku/nodejs`);
 }
 
-shell.exec(`heroku git:clone --app ${appName} --ssh-git`);
+shell.exec(`heroku git:clone --app ${appName}`);
 shell.cd(`${appName}`);
 const a = shell.ls('-a').stdout;
 console.log('a', a);
