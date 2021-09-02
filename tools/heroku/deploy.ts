@@ -1,5 +1,6 @@
 import * as yargs from 'yargs';
 import * as shell from 'shelljs';
+
 import { words, escape, lowerCase } from 'lodash';
 
 const argv = yargs.option('appName', { type: 'string', default: 'Foo/Bar003' }).argv;
@@ -15,7 +16,7 @@ if (!apps.includes(appName)) {
   shell.exec(`heroku create ${appName} --buildpack heroku/nodejs`);
 }
 
-shell.exec(`heroku git:clone --app ${appName}`);
+shell.exec(`heroku git:clone --app ${appName} --ssh-git`);
 shell.cd(`${appName}`);
 const a = shell.ls('-a').stdout;
 console.log('a', a);
