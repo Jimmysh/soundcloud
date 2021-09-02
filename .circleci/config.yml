@@ -181,6 +181,7 @@ commands:
       - codecov/upload:
           file: coverage/**/lcov.info
   deplay_to_heroku:
+    executor: heroku/default
     parameters:
       app-name:
         type: string
