@@ -188,6 +188,7 @@ commands:
       - heroku/install
       - heroku/check-authentication:
           print-whoami: true
+      - run: heroku container:login
       - run: node dist/tools/heroku/deploy.js --app-name << parameters.app-name >>
 
 jobs:
