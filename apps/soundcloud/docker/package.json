@@ -2,7 +2,7 @@
   "name": "soundcloud",
   "main": "server/main",
   "scripts": {
-    "start": "node server/main"
+    "start": "node ./server/main"
   },
   "engines": {
     "node": "14.x"

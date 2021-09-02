@@ -6,7 +6,7 @@ import * as yargs from 'yargs';
 
 const argv = yargs
   .option('gitPath', { type: 'string', default: join(cwd(), 'deploy-apps') })
-  .option('appName', { type: 'string', default: 'Foo/Bar003' })
+  .option('appName', { type: 'string', default: 'default' })
   .option('copyPath', { type: 'string', default: join(cwd(), 'apps/soundcloud/docker') }).argv;
 
 const apps: string[] = shell
