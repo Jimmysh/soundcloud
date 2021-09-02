@@ -1,9 +1,9 @@
+import { existsSync } from 'fs';
 import { escape, lowerCase, words } from 'lodash';
-import { cwd } from 'process';
 import { join } from 'path';
+import { cwd } from 'process';
 import * as shell from 'shelljs';
 import * as yargs from 'yargs';
-import { existsSync } from 'fs';
 
 const argv = yargs
   .option('gitPath', { type: 'string', default: join(cwd(), 'deploy-apps') })

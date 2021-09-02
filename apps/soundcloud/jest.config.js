@@ -1,7 +1,7 @@
 module.exports = {
   displayName: 'soundcloud',
   preset: '../../jest.preset.js',
-  collectCoverageFrom: ['./src/app/**/*.ts', '!*.module.ts'],
+  collectCoverageFrom: ['./src/app/**/*.ts', '!./src/**/*.module.ts'],
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
