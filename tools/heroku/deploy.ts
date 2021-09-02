@@ -39,3 +39,7 @@ shell.cd(cloneFilder);
 shell.exec('git add *');
 shell.exec('git commit -m "update"');
 shell.exec('git push -f');
+
+//   CIRCLE_PULL_REQUEST=https://github.com/Jimmysh/soundcloud/pull/10
+
+// http://api.github.com/repos/Jimmysh/soundcloud/pulls/10/comments
