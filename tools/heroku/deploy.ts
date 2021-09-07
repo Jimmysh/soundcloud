@@ -7,7 +7,9 @@ import * as yargs from 'yargs';
 
 const argv = yargs
   .option('gitPath', { type: 'string', default: join(cwd(), 'deploy-apps') })
-  .option('appName', { type: 'string', default: 'default' })
+  .option('projectName', { type: 'string', default: '' })
+  .option('branchName', { type: 'string', default: '' })
+  .option('pipelineName', { type: 'string', default: '' })
   .option('copyPath', { type: 'string', default: join(cwd(), 'apps/soundcloud/docker') }).argv;
 
 const apps: string[] = shell
@@ -15,7 +17,19 @@ const apps: string[] = shell
   .stdout.split('\n')
   .filter(d => !!d && !d.startsWith('=='));
 
-const appName = words(argv.appName).map(escape).map(lowerCase).join('-');
+let nameMaxLength = 30;
+nameMaxLength -= argv.projectName.length;
+let newBranchName = argv.branchName;
+nameMaxLength -= newBranchName.length;
+nameMaxLength -= `${argv.pipelineName}`.length;
+newBranchName = newBranchName.slice(0, nameMaxLength);
+
+const appNameStr = `${argv.projectName}-${newBranchName}-${argv.pipelineName}`
+  .replace(/-+/, '-')
+  .replace(/^-/, '')
+  .replace(/-$/, '');
+
+const appName = words(appNameStr).map(escape).map(lowerCase).join('-');
 
 if (!apps.includes(appName)) {
   shell.exec(`heroku create ${appName} --buildpack heroku/nodejs`);
