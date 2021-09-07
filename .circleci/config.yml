@@ -189,7 +189,7 @@ commands:
         type: string
         default: << pipeline.git.branch >>
       pipeline-number:
-        type: number
+        type: string
     steps:
       - heroku/install
       - run: npm run build:ssr -- --prod
