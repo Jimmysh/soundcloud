@@ -182,8 +182,14 @@ commands:
           file: coverage/**/lcov.info
   deplay_to_heroku:
     parameters:
-      app-name:
+      project-name:
         type: string
+        default: ${CIRCLE_PROJECT_REPONAME}
+      branch-name:
+        type: string
+        default: << pipeline.git.branch >>
+      pipeline-number:
+        type: number
     steps:
       - heroku/install
       - run: npm run build:ssr -- --prod
