@@ -1,11 +1,4 @@
 {
-  "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    ".eslintrc.json": "*"
-  },
   "affected": {
     "defaultBase": "master"
   },
@@ -20,14 +13,12 @@
       }
     }
   },
-  "projects": {
-    "soundcloud": {
-      "tags": []
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
     },
-    "soundcloud-e2e": {
-      "tags": [],
-      "implicitDependencies": ["soundcloud"]
-    }
+    ".eslintrc.json": "*"
   },
   "targetDependencies": {
     "build": [
