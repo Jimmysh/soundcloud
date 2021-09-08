@@ -9,7 +9,7 @@ const argv = yargs
   .option('gitPath', { type: 'string', default: join(cwd(), 'deploy-apps') })
   .option('projectName', { type: 'string', default: '' })
   .option('branchName', { type: 'string', default: '' })
-  .option('pipelineNumber', { type: 'string', default: 0 })
+  .option('pipelineNumber', { type: 'string', default: '' })
   .option('copyPath', { type: 'string', default: join(cwd(), 'apps/soundcloud/docker') }).argv;
 
 const apps: string[] = shell
@@ -21,8 +21,12 @@ let nameMaxLength = 30;
 nameMaxLength -= argv.projectName.length;
 let newBranchName = argv.branchName;
 nameMaxLength -= newBranchName.length;
-const pipelineNumber = argv.pipelineNumber || '';
-nameMaxLength -= `${pipelineNumber}`.length;
+let pipelineNumber = `${argv.pipelineNumber}`;
+if (pipelineNumber === '0' || !pipelineNumber) {
+  pipelineNumber = '';
+}
+
+nameMaxLength -= pipelineNumber.length;
 newBranchName = newBranchName.slice(0, nameMaxLength);
 
 const appNameStr = `${argv.projectName}-${newBranchName}-${pipelineNumber}`
