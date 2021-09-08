@@ -2,7 +2,7 @@
   "projectType": "application",
   "root": "apps/soundcloud",
   "sourceRoot": "apps/soundcloud/src",
-  "prefix": "soundcloud",
+  "prefix": "app",
   "targets": {
     "build": {
       "builder": "@angular-devkit/build-angular:browser",
