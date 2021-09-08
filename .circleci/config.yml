@@ -190,6 +190,7 @@ commands:
         default: << pipeline.git.branch >>
       pipeline-number:
         type: integer
+        default: null
     steps:
       - heroku/install
       - run: npm run build:ssr -- --prod
