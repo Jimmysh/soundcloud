@@ -190,6 +190,7 @@ commands:
         default: << pipeline.git.branch >>
       pipeline-number:
         type: integer
+        default: 0
     steps:
       - heroku/install
       - run: npm run build:ssr -- --prod
@@ -253,10 +254,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
-      - deplay_to_heroku:
-          project-name: ${CIRCLE_PROJECT_REPONAME}
-          branch-name: << pipeline.git.branch >>
-          pipeline-number: 0
+      - deplay_to_heroku
       - run: *update_deploy
       - save_cache: *save_deploy_cache
 
@@ -281,8 +279,6 @@ jobs:
       - store_artifacts: *store_artifacts_apps
       - store_artifacts: *store_artifacts_libs
       - deplay_to_heroku:
-          project-name: ${CIRCLE_PROJECT_REPONAME}
-          branch-name: << pipeline.git.branch >>
           pipeline-number: << pipeline.number >>
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache

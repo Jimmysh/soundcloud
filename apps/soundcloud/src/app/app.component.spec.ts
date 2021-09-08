@@ -19,11 +19,4 @@ describe('AppComponent1', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('soundcloud');
   });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to rg soundcloud!');
-  });
 });
