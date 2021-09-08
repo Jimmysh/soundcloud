@@ -182,8 +182,15 @@ commands:
           file: coverage/**/lcov.info
   deplay_to_heroku:
     parameters:
-      app-name:
+      project-name:
         type: string
+        default: ${CIRCLE_PROJECT_REPONAME}
+      branch-name:
+        type: string
+        default: << pipeline.git.branch >>
+      pipeline-number:
+        type: integer
+        default: 0
     steps:
       - heroku/install
       - run: npm run build:ssr -- --prod
@@ -193,7 +200,7 @@ commands:
           git config --global user.email "hero63418@gmail.com"
           git config --global user.name "Jimmy"
       - run: bash .circleci/heroku-setup.sh
-      - run: node dist/tools/heroku/deploy.js --app-name << parameters.app-name >>
+      - run: node dist/tools/heroku/deploy.js --project-name << parameters.project-name >> --branch-name << parameters.branch-name >> --pipeline-number << parameters.pipeline-number >>
 
 jobs:
   install:
@@ -247,8 +254,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout_and_cache
-      - deplay_to_heroku:
-          app-name: ${CIRCLE_PROJECT_REPONAME}-<< pipeline.git.branch >>
+      - deplay_to_heroku
       - run: *update_deploy
       - save_cache: *save_deploy_cache
 
@@ -273,7 +279,7 @@ jobs:
       - store_artifacts: *store_artifacts_apps
       - store_artifacts: *store_artifacts_libs
       - deplay_to_heroku:
-          app-name: ${CIRCLE_PROJECT_REPONAME}-<< pipeline.git.branch >>-<< pipeline.number >>
+          pipeline-number: << pipeline.number >>
       - save_cache: *save_yarn_cache
       - save_cache: *save_build_cache
       - save_cache: *save_test_cache
