@@ -5,7 +5,7 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "builder": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:browser",
       "options": {
         "outputPath": "dist/apps/soundcloud/browser",
         "index": "apps/soundcloud/src/index.html",
@@ -51,7 +51,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "builder": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
           "browserTarget": "soundcloud:build:production"
@@ -63,19 +63,20 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "builder": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
         "browserTarget": "soundcloud:build"
       }
     },
     "lint": {
-      "builder": "@nrwl/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": ["apps/soundcloud/src/**/*.ts", "apps/soundcloud/src/**/*.html"]
-      }
+      },
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
-      "builder": "@nrwl/jest:jest",
+      "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/soundcloud"],
       "options": {
         "jestConfig": "apps/soundcloud/jest.config.js",
@@ -83,7 +84,7 @@
       }
     },
     "server": {
-      "builder": "@angular-devkit/build-angular:server",
+      "executor": "@angular-devkit/build-angular:server",
       "options": {
         "outputPath": "dist/apps/soundcloud/server",
         "main": "apps/soundcloud/server.ts",
@@ -109,7 +110,7 @@
       "defaultConfiguration": "production"
     },
     "serve-ssr": {
-      "builder": "@nguniversal/builders:ssr-dev-server",
+      "executor": "@nguniversal/builders:ssr-dev-server",
       "configurations": {
         "development": {
           "browserTarget": "soundcloud:build:development",
@@ -123,7 +124,7 @@
       "defaultConfiguration": "development"
     },
     "prerender": {
-      "builder": "@nguniversal/builders:prerender",
+      "executor": "@nguniversal/builders:prerender",
       "options": {
         "routes": ["/"]
       },
