@@ -21,10 +21,11 @@ let nameMaxLength = 30;
 nameMaxLength -= argv.projectName.length;
 let newBranchName = argv.branchName;
 nameMaxLength -= newBranchName.length;
-nameMaxLength -= `${argv.pipelineName || ''}`.length;
+const pipelineName = argv.pipelineName || '';
+nameMaxLength -= `${pipelineName}`.length;
 newBranchName = newBranchName.slice(0, nameMaxLength);
 
-const appNameStr = `${argv.projectName}-${newBranchName}-${argv.pipelineName}`
+const appNameStr = `${argv.projectName}-${newBranchName}-${pipelineName}`
   .replace(/-+/, '-')
   .replace(/^-/, '')
   .replace(/-$/, '');
