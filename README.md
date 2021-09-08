@@ -1,4 +1,4 @@
-# Soundcloud1
+# Soundcloud
 
 [![CircleCI](https://circleci.com/gh/Jimmysh/soundcloud/tree/master.svg?style=svg)](https://circleci.com/gh/Jimmysh/soundcloud/tree/master)
 [![codecov](https://codecov.io/gh/Jimmysh/soundcloud/branch/master/graph/badge.svg?token=V53R84BX4P)](https://codecov.io/gh/Jimmysh/soundcloud)
@@ -8,3 +8,5 @@
 [![codebeat badge](https://codebeat.co/badges/b88a5945-c78a-48c7-8dba-224fc047e85b)](https://codebeat.co/projects/github-com-jimmysh-soundcloud-master)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Jimmysh/soundcloud.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Jimmysh/soundcloud/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Jimmysh/soundcloud.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Jimmysh/soundcloud/context:javascript)
+
+demo: [https://soundcloud-master.herokuapp.com/](https://soundcloud-master.herokuapp.com/)
