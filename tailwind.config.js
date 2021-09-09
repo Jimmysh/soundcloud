@@ -4,7 +4,7 @@ module.exports = {
   purge: {
     content: ['./apps/**/*.{html,ts}', './libs/**/*.{html,ts}']
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {},
   variants: {
     extend: {
