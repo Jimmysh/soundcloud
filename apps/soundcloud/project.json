@@ -12,9 +12,20 @@
         "main": "apps/soundcloud/src/main.ts",
         "polyfills": "apps/soundcloud/src/polyfills.ts",
         "tsConfig": "apps/soundcloud/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
         "assets": ["apps/soundcloud/src/favicon.ico", "apps/soundcloud/src/assets"],
-        "styles": ["apps/soundcloud/src/styles.scss"],
+        "styles": [
+          "apps/soundcloud/src/themes/core.scss",
+          {
+            "input": "apps/soundcloud/src/themes/dark.scss",
+            "bundleName": "theme.dark",
+            "inject": false
+          },
+          {
+            "input": "apps/soundcloud/src/themes/light.scss",
+            "bundleName": "theme.light",
+            "inject": false
+          }
+        ],
         "scripts": []
       },
       "configurations": {
@@ -88,8 +99,7 @@
       "options": {
         "outputPath": "dist/apps/soundcloud/server",
         "main": "apps/soundcloud/server.ts",
-        "tsConfig": "apps/soundcloud/tsconfig.server.json",
-        "inlineStyleLanguage": "scss"
+        "tsConfig": "apps/soundcloud/tsconfig.server.json"
       },
       "configurations": {
         "production": {
@@ -122,21 +132,6 @@
         }
       },
       "defaultConfiguration": "development"
-    },
-    "prerender": {
-      "executor": "@nguniversal/builders:prerender",
-      "options": {
-        "routes": ["/"]
-      },
-      "configurations": {
-        "production": {
-          "browserTarget": "soundcloud:build:production"
-        },
-        "development": {
-          "browserTarget": "soundcloud:build:development"
-        }
-      },
-      "defaultConfiguration": "production"
     }
   },
   "tags": [],

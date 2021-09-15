@@ -30,7 +30,6 @@
     "dev:ssr": "ng run soundcloud:serve-ssr",
     "serve:ssr": "node dist/soundcloud/server/main.js",
     "build:ssr": "ng build && ng run soundcloud:server",
-    "prerender": "ng run soundcloud:prerender",
     "build:tools": "tsc -p ./tools/tsconfig.tools.json",
     "run:tools": "ts-node --project ./tools/tsconfig.tools.json -r tsconfig-paths/register"
   },
